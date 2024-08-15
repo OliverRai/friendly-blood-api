@@ -1,5 +1,6 @@
 package com.friendlyblood.api.models;
 
+import com.friendlyblood.api.models.baseModel.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,7 +15,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class DonationProof {
+public class DonationProof extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
