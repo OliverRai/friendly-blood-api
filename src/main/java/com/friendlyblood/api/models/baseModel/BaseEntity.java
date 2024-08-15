@@ -14,10 +14,10 @@ import java.time.LocalDateTime;
 @Getter
 public class BaseEntity {
 
-    @Column(nullable = false)
+    @Column()
     public LocalDateTime createAt;
 
-    @Column(nullable = false)
+    @Column()
     public LocalDateTime updateAt;
 
     @Column()

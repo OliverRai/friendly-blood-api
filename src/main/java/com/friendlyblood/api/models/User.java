@@ -32,7 +32,7 @@ public class User extends BaseEntity {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column(name = "blood_type", nullable = false)
     private String bloodType;
 
     @Column(nullable = false)
