@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.friendlyblood.api.controllers.UserController;
 import com.friendlyblood.api.dtos.UserRequestDTO;
 import com.friendlyblood.api.enums.BloodType;
-import com.friendlyblood.api.models.User;
+import com.friendlyblood.api.domain.models.User;
 import com.friendlyblood.api.services.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

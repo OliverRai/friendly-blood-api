@@ -2,7 +2,7 @@ package com.friendlyblood.api.controllers;
 
 import com.friendlyblood.api.dtos.UserRequestDTO;
 import com.friendlyblood.api.dtos.UserResponseDTO;
-import com.friendlyblood.api.models.User;
+import com.friendlyblood.api.domain.models.User;
 import com.friendlyblood.api.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

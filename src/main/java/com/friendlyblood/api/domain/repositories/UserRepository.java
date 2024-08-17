@@ -1,6 +1,6 @@
-package com.friendlyblood.api.repositories;
+package com.friendlyblood.api.domain.repositories;
 
-import com.friendlyblood.api.models.User;
+import com.friendlyblood.api.domain.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;

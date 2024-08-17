@@ -1,4 +1,4 @@
-package com.friendlyblood.api.models.baseModel;
+package com.friendlyblood.api.domain.models.baseModel;
 
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
