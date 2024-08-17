@@ -1,4 +1,4 @@
-package com.friendlyblood.api.enums;
+package com.friendlyblood.api.utils.enums;
 
 public enum BloodType {
     A_POSITIVE("A+"),
