@@ -2,7 +2,7 @@ package com.friendlyblood.api.domain.models;
 
 
 import com.friendlyblood.api.dtos.UserRequestDTO;
-import com.friendlyblood.api.enums.BloodType;
+import com.friendlyblood.api.utils.enums.BloodType;
 import com.friendlyblood.api.domain.models.baseModel.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
