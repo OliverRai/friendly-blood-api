@@ -1,4 +1,4 @@
-package com.friendlyblood.api.utils;
+package com.friendlyblood.api.utils.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.HashMap;
 import java.util.Map;
+
 
 @RestControllerAdvice
 public class ValidationExceptionHandler {
@@ -22,5 +23,10 @@ public class ValidationExceptionHandler {
             errors.put(fieldName, errorMessage);
         });
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(InternalServerException.class)
+    public ResponseEntity<String> handleInternalServerException(InternalServerException ex) {
+        return new ResponseEntity<>("Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

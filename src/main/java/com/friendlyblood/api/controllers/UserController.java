@@ -22,17 +22,11 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<?> createUser(@Valid @RequestBody UserRequestDTO userRequestBody) {
-        try{
-            User user = new User(userRequestBody);
+        User user = new User(userRequestBody);
 
-            User savedUser = this.userService.saveUser(user);
+        User savedUser = this.userService.saveUser(user);
 
-            UserResponseDTO userResponseBody = new UserResponseDTO(savedUser.getId());
-            return new ResponseEntity<>(userResponseBody, HttpStatus.OK);
-        }
-        catch (Exception ex){
-            return new ResponseEntity<>("Erro ao salvar o usuário: " + ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-
-        }
+        UserResponseDTO userResponseBody = new UserResponseDTO(savedUser.getId());
+        return new ResponseEntity<>(userResponseBody, HttpStatus.OK);
     }
 }
