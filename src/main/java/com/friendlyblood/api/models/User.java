@@ -2,6 +2,7 @@ package com.friendlyblood.api.models;
 
 
 import com.friendlyblood.api.dtos.UserRequestDTO;
+import com.friendlyblood.api.enums.BloodType;
 import com.friendlyblood.api.models.baseModel.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -32,8 +33,9 @@ public class User extends BaseEntity {
     @Column(nullable = false)
     private String name;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "blood_type", nullable = false)
-    private String bloodType;
+    private BloodType bloodType;
 
     @Column(nullable = false)
     private String address;
