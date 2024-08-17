@@ -1,4 +1,4 @@
-package com.friendlyblood.api.models.baseModel;
+package com.friendlyblood.api.domain.models.baseModel;
 
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
@@ -14,10 +14,10 @@ import java.time.LocalDateTime;
 @Getter
 public class BaseEntity {
 
-    @Column(nullable = false)
+    @Column()
     public LocalDateTime createAt;
 
-    @Column(nullable = false)
+    @Column()
     public LocalDateTime updateAt;
 
     @Column()

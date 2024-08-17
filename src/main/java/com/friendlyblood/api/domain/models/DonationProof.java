@@ -1,6 +1,6 @@
-package com.friendlyblood.api.models;
+package com.friendlyblood.api.domain.models;
 
-import com.friendlyblood.api.models.baseModel.BaseEntity;
+import com.friendlyblood.api.domain.models.baseModel.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
