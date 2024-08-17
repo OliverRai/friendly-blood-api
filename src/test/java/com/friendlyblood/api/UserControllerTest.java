@@ -3,6 +3,7 @@ package com.friendlyblood.api;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.friendlyblood.api.controllers.UserController;
 import com.friendlyblood.api.dtos.UserRequestDTO;
+import com.friendlyblood.api.enums.BloodType;
 import com.friendlyblood.api.models.User;
 import com.friendlyblood.api.services.UserService;
 import org.junit.jupiter.api.BeforeEach;
@@ -40,7 +41,7 @@ public class UserControllerTest {
                 "test@example.com",
                 "password123",
                 "John Doe",
-                "O+",
+                BloodType.O_POSITIVE,
                 "123 Main St"
         );
     }
@@ -65,7 +66,7 @@ public class UserControllerTest {
                 "",
                 "password123",
                 "John Doe",
-                "O+",
+                BloodType.O_POSITIVE,
                 "123 Main St"
         );
 
@@ -81,7 +82,7 @@ public class UserControllerTest {
                 "test@example.com",
                 "1",
                 "John Doe",
-                "O+",
+                BloodType.O_POSITIVE,
                 "123 Main St"
         );
 
@@ -97,23 +98,7 @@ public class UserControllerTest {
                 "test@example.com",
                 "password123",
                 "",
-                "O+",
-                "123 Main St"
-        );
-
-        mockMvc.perform(post("/user")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(invalidUserRequest)))
-                .andExpect(status().isBadRequest());
-    }
-
-    @Test
-    public void createUserShouldReturnBadRequestWhenBloodTypeIsInvalid() throws Exception {
-        UserRequestDTO invalidUserRequest = new UserRequestDTO(
-                "test@example.com",
-                "password123",
-                "John Doe",
-                "",
+                BloodType.O_POSITIVE,
                 "123 Main St"
         );
 
@@ -129,7 +114,7 @@ public class UserControllerTest {
                 "test@example.com",
                 "password123",
                 "John Doe",
-                "O+",
+                BloodType.O_POSITIVE,
                 ""
         );
 
