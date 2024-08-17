@@ -17,7 +17,8 @@ public record UserRequestDTO(
     @NotBlank(message = "Name is required")
     String name,
 
-    BloodType bloodType,
+    @NotBlank(message = "bloodType is required")
+    String bloodType,
 
     @NotBlank(message = "Address is required")
     String address
