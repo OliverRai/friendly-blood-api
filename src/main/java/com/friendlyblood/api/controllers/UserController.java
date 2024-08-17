@@ -25,6 +25,6 @@ public class UserController {
         User savedUser = this.userService.saveUser(user);
 
         UserResponseDTO userResponseBody = new UserResponseDTO(savedUser.getId());
-        return new ResponseEntity<>(userResponseBody, HttpStatus.OK);
+        return new ResponseEntity<>(userResponseBody, HttpStatus.CREATED);
     }
 }
