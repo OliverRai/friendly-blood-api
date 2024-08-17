@@ -1,6 +1,6 @@
 package com.friendlyblood.api.dtos;
 
-import com.friendlyblood.api.enums.BloodType;
+import com.friendlyblood.api.utils.enums.BloodType;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
