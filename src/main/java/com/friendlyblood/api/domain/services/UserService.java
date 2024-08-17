@@ -1,6 +1,4 @@
-package com.friendlyblood.api.services;
-
-
+package com.friendlyblood.api.domain.services;
 
 import com.friendlyblood.api.domain.models.User;
 import com.friendlyblood.api.domain.repositories.UserRepository;

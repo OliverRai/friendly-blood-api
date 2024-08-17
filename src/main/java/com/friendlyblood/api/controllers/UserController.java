@@ -3,15 +3,13 @@ package com.friendlyblood.api.controllers;
 import com.friendlyblood.api.dtos.UserRequestDTO;
 import com.friendlyblood.api.dtos.UserResponseDTO;
 import com.friendlyblood.api.domain.models.User;
-import com.friendlyblood.api.services.UserService;
+import com.friendlyblood.api.domain.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 @RequestMapping("/user")

@@ -1,8 +1,7 @@
 package com.friendlyblood.api.domain.models;
 
-
 import com.friendlyblood.api.dtos.UserRequestDTO;
-import com.friendlyblood.api.utils.enums.BloodType;
+import com.friendlyblood.api.domain.enums.BloodType;
 import com.friendlyblood.api.domain.models.baseModel.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -44,7 +43,7 @@ public class User extends BaseEntity {
         this.email = payload.email();
         this.password = payload.password();
         this.name = payload.name();
-        this.bloodType = BloodType.fromString(payload.bloodType());
+        this.bloodType = payload.bloodType();
         this.address = payload.address();
     }
 }
