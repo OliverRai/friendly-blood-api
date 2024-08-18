@@ -14,10 +14,12 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.friendlyblood.api.config.security.SecurityConfigurations;
 import com.friendlyblood.api.controllers.UserController;
 import com.friendlyblood.api.domain.enums.BloodType;
 import com.friendlyblood.api.domain.models.User;
@@ -25,6 +27,7 @@ import com.friendlyblood.api.domain.services.UserService;
 import com.friendlyblood.api.dtos.User.UserRequestDTO;
 
 @WebMvcTest(UserController.class)
+@Import(SecurityConfigurations.class)
 public class UserControllerTest {
 
         @Autowired
