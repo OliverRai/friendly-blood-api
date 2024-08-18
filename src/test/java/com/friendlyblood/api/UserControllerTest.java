@@ -22,7 +22,7 @@ import com.friendlyblood.api.controllers.UserController;
 import com.friendlyblood.api.domain.enums.BloodType;
 import com.friendlyblood.api.domain.models.User;
 import com.friendlyblood.api.domain.services.UserService;
-import com.friendlyblood.api.dtos.UserRequestDTO;
+import com.friendlyblood.api.dtos.User.UserRequestDTO;
 
 @WebMvcTest(UserController.class)
 public class UserControllerTest {

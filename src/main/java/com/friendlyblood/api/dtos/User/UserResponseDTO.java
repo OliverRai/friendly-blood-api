@@ -1,4 +1,4 @@
-package com.friendlyblood.api.dtos;
+package com.friendlyblood.api.dtos.User;
 
 import java.util.UUID;
 

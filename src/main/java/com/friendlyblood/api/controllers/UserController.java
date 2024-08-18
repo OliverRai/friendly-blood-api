@@ -4,6 +4,8 @@ import com.friendlyblood.api.dtos.UserRequestDTO;
 import com.friendlyblood.api.dtos.UserResponseDTO;
 import com.friendlyblood.api.domain.models.User;
 import com.friendlyblood.api.domain.services.UserService;
+import com.friendlyblood.api.dtos.User.UserRequestDTO;
+import com.friendlyblood.api.dtos.User.UserResponseDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
