@@ -56,7 +56,7 @@ public class UserControllerTest {
                 User user = new User(validUserRequest);
                 user.setId(UUID.randomUUID());
 
-                Mockito.when(userService.saveUser(Mockito.any(User.class))).thenReturn(user);
+                Mockito.when(userService.createUser(Mockito.any(User.class))).thenReturn(user);
 
                 mockMvc.perform(post("/user")
                                 .contentType(MediaType.APPLICATION_JSON)
@@ -130,13 +130,14 @@ public class UserControllerTest {
                 User existingUser = new User(validUserRequest);
                 existingUser.setId(UUID.randomUUID());
 
-                Mockito.when(userService.getUserByEmail(validUserRequest.email())).thenReturn(Optional.of(existingUser));
+                Mockito.when(userService.getUserByEmail(validUserRequest.email()))
+                                .thenReturn(Optional.of(existingUser));
 
                 mockMvc.perform(post("/user")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(objectMapper.writeValueAsString(validUserRequest)))
-                        .andExpect(status().isFound())
-                        .andExpect(content().string("Email já cadastrado"));
+                                .andExpect(status().isFound())
+                                .andExpect(content().string("Email já cadastrado"));
         }
 
         @Test
@@ -147,8 +148,8 @@ public class UserControllerTest {
                 Mockito.when(userService.getUserById(user.getId())).thenReturn(Optional.of(user));
 
                 mockMvc.perform(get("/user/{id}", user.getId()))
-                        .andExpect(status().isOk())
-                        .andExpect(content().json(objectMapper.writeValueAsString(user)));
+                                .andExpect(status().isOk())
+                                .andExpect(content().json(objectMapper.writeValueAsString(user)));
         }
 
         @Test
@@ -158,8 +159,8 @@ public class UserControllerTest {
                 Mockito.when(userService.getUserById(nonExistentId)).thenReturn(Optional.empty());
 
                 mockMvc.perform(get("/user/{id}", nonExistentId))
-                        .andExpect(status().isNotFound())
-                        .andExpect(content().string("Usuário não cadastrado"));
+                                .andExpect(status().isNotFound())
+                                .andExpect(content().string("Usuário não cadastrado"));
         }
 
         @Test
@@ -167,42 +168,42 @@ public class UserControllerTest {
                 String invalidId = "invalid-uuid";
 
                 mockMvc.perform(get("/user/{id}", invalidId))
-                        .andExpect(status().isBadRequest());
+                                .andExpect(status().isBadRequest());
         }
 
         @Test
         public void createUserShouldReturnBadRequestWhenRequiredFieldsAreMissing() throws Exception {
                 UserRequestDTO invalidUserRequest = new UserRequestDTO(
-                        null, 
-                        "password123",
-                        "John Doe",
-                        BloodType.O_POSITIVE,
-                        "123 Main St");
+                                null,
+                                "password123",
+                                "John Doe",
+                                BloodType.O_POSITIVE,
+                                "123 Main St");
 
                 mockMvc.perform(post("/user")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(objectMapper.writeValueAsString(invalidUserRequest)))
-                        .andExpect(status().isBadRequest());
+                                .andExpect(status().isBadRequest());
         }
 
         @Test
         public void createUserShouldReturnCreatedWhenOptionalFieldsAreProvided() throws Exception {
                 UserRequestDTO userRequestWithOptionalFields = new UserRequestDTO(
-                        "test@example.com",
-                        "password123",
-                        "John Doe",
-                        BloodType.O_NEGATIVE,
-                        "456 Another St");
+                                "test@example.com",
+                                "password123",
+                                "John Doe",
+                                BloodType.O_NEGATIVE,
+                                "456 Another St");
 
                 User user = new User(userRequestWithOptionalFields);
                 user.setId(UUID.randomUUID());
 
-                Mockito.when(userService.saveUser(Mockito.any(User.class))).thenReturn(user);
+                Mockito.when(userService.createUser(Mockito.any(User.class))).thenReturn(user);
 
                 mockMvc.perform(post("/user")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(objectMapper.writeValueAsString(userRequestWithOptionalFields)))
-                        .andExpect(status().isCreated())
-                        .andExpect(content().json("{\"id\":\"" + user.getId() + "\"}"));
+                                .andExpect(status().isCreated())
+                                .andExpect(content().json("{\"id\":\"" + user.getId() + "\"}"));
         }
 }
