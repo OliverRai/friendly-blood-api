@@ -25,6 +25,7 @@ import com.friendlyblood.api.domain.enums.BloodType;
 import com.friendlyblood.api.domain.models.User;
 import com.friendlyblood.api.domain.services.UserService;
 import com.friendlyblood.api.dtos.User.UserRequestDTO;
+import com.friendlyblood.api.dtos.User.UserResponseDTO;
 
 @WebMvcTest(UserController.class)
 @Import(SecurityConfigurations.class)
@@ -147,9 +148,11 @@ public class UserControllerTest {
 
                 Mockito.when(userService.getUserById(user.getId())).thenReturn(Optional.of(user));
 
+                UserResponseDTO userResponse = new UserResponseDTO(user);
+
                 mockMvc.perform(get("/user/{id}", user.getId()))
                                 .andExpect(status().isOk())
-                                .andExpect(content().json(objectMapper.writeValueAsString(user)));
+                                .andExpect(content().json(objectMapper.writeValueAsString(userResponse)));
         }
 
         @Test
