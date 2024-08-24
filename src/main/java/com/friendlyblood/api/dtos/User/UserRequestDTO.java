@@ -1,4 +1,4 @@
-package com.friendlyblood.api.dtos;
+package com.friendlyblood.api.dtos.User;
 
 import com.friendlyblood.api.domain.enums.BloodType;
 import jakarta.validation.constraints.Email;

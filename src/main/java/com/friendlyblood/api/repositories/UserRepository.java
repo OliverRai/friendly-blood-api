@@ -1,4 +1,4 @@
-package com.friendlyblood.api.domain.repositories;
+package com.friendlyblood.api.repositories;
 
 import com.friendlyblood.api.domain.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;

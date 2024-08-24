@@ -1,9 +1,13 @@
 package com.friendlyblood.api.controllers;
 
-import com.friendlyblood.api.dtos.UserRequestDTO;
-import com.friendlyblood.api.dtos.UserResponseDTO;
 import com.friendlyblood.api.domain.models.User;
 import com.friendlyblood.api.domain.services.UserService;
+import com.friendlyblood.api.dtos.User.LoginRequestDTO;
+import com.friendlyblood.api.dtos.User.LoginResponseDTO;
+import com.friendlyblood.api.dtos.User.UserRequestDTO;
+import com.friendlyblood.api.dtos.User.UserResponseDTO;
+
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,9 +22,10 @@ import java.util.UUID;
 public class UserController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @PostMapping
+    @Transactional
     public ResponseEntity<?> createUser(@Valid @RequestBody UserRequestDTO userRequestBody) {
         User user = new User(userRequestBody);
 
@@ -28,9 +33,9 @@ public class UserController {
             return new ResponseEntity<>("Email já cadastrado", HttpStatus.FOUND);
         }
 
-        User savedUser = this.userService.saveUser(user);
+        User savedUser = this.userService.createUser(user);
 
-        UserResponseDTO userResponseBody = new UserResponseDTO(savedUser.getId());
+        UserResponseDTO userResponseBody = new UserResponseDTO(savedUser);
         return new ResponseEntity<>(userResponseBody, HttpStatus.CREATED);
     }
 
@@ -39,7 +44,19 @@ public class UserController {
         Optional<User> existsUser = this.userService.getUserById(id);
 
         if (existsUser.isPresent()){
-            return new ResponseEntity<>(existsUser, HttpStatus.OK);
+            UserResponseDTO userResponseBody = new UserResponseDTO(existsUser.get());
+            return new ResponseEntity<>(userResponseBody, HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>("Usuário não cadastrado", HttpStatus.NOT_FOUND);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginRequestDTO login){
+        Optional<String> token = this.userService.login(login.email(), login.password());
+
+        if (token.isPresent()){
+            return new ResponseEntity<>(new LoginResponseDTO(token), HttpStatus.OK);
         }
 
         return new ResponseEntity<>("Usuário não cadastrado", HttpStatus.NOT_FOUND);
