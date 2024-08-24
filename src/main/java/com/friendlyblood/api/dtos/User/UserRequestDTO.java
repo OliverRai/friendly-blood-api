@@ -1,8 +1,10 @@
 package com.friendlyblood.api.dtos.User;
 
 import com.friendlyblood.api.domain.enums.BloodType;
+import com.friendlyblood.api.domain.models.Address;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public record UserRequestDTO(
@@ -19,6 +21,6 @@ public record UserRequestDTO(
     
     BloodType bloodType,
 
-    @NotBlank(message = "Address is required")
-    String address
+    @NotNull(message = "Address is required")
+    Address address
 ) {}
