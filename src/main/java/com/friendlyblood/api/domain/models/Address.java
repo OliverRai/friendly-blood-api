@@ -34,7 +34,7 @@ public class Address extends BaseEntity {
     private Integer number;
 
     @NotNull
-    @Column(nullable = false)
+    @Column(name = "postal_code", nullable = false)
     private Integer postalCode;
 
     @NotBlank
