@@ -5,6 +5,7 @@ import java.util.UUID;
 import com.friendlyblood.api.domain.enums.BloodType;
 import com.friendlyblood.api.domain.models.Address;
 import com.friendlyblood.api.domain.models.User;
+import com.friendlyblood.api.dtos.Address.AddressRequestDTO;
 import com.friendlyblood.api.dtos.User.LoginRequestDTO;
 import com.friendlyblood.api.dtos.User.UserRequestDTO;
 import com.github.javafaker.Faker;
@@ -15,12 +16,7 @@ public class UserFaker {
 
   public static User getUserFaker() {
 
-    Address address = new Address();
-    address.setStreet(faker.address().streetName());
-    address.setNumber(faker.number().numberBetween(1, 1000));
-    address.setPostalCode(faker.number().numberBetween(10000, 99999));
-    address.setDistrict(faker.address().city());
-    address.setState(faker.address().state());
+    Address address = AddressFaker.getAddressFaker();
 
     User user = new User();
     user.setEmail(faker.internet().emailAddress());
@@ -29,16 +25,13 @@ public class UserFaker {
     user.setBloodType(faker.options().option(BloodType.class));
     user.setAddress(address);
     user.setId(UUID.randomUUID());
+
     return user;
   }
 
   public static UserRequestDTO getUserRequestDTOFaker() {
-    Address address = new Address();
-    address.setStreet(faker.address().streetName());
-    address.setNumber(faker.number().numberBetween(1, 1000));
-    address.setPostalCode(faker.number().numberBetween(10000, 99999));
-    address.setDistrict(faker.address().city());
-    address.setState(faker.address().state());
+
+    AddressRequestDTO address = AddressFaker.getAddressRequestDTOFaker();
 
     return new UserRequestDTO(
         faker.internet().emailAddress(),

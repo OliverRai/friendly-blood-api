@@ -9,6 +9,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 import com.friendlyblood.api.domain.models.Address;
+import com.friendlyblood.api.dtos.Address.AddressRequestDTO;
+import com.friendlyblood.api.faker.AddressFaker;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -56,12 +58,7 @@ public class UserControllerTest {
     @BeforeEach
     void setUp() {
         faker = new Faker();
-        Address address = new Address();
-        address.setStreet("123 Main St");
-        address.setNumber(123);
-        address.setPostalCode(12345);
-        address.setDistrict("Downtown");
-        address.setState("CA");
+        AddressRequestDTO address = AddressFaker.getAddressRequestDTOFaker();
 
         validUserRequest = new UserRequestDTO(
                 "test@example.com",
@@ -87,13 +84,7 @@ public class UserControllerTest {
 
     @Test
     public void createUserShouldReturnBadRequestWhenEmailIsInvalid() throws Exception {
-        Address address = new Address();
-        address.setStreet("123 Main St");
-        address.setNumber(123);
-        address.setPostalCode(12345);
-        address.setDistrict("Downtown");
-        address.setState("CA");
-
+        AddressRequestDTO address = AddressFaker.getAddressRequestDTOFaker();
         UserRequestDTO invalidUserRequest = new UserRequestDTO(
                 "",
                 "password123",
@@ -109,13 +100,7 @@ public class UserControllerTest {
 
     @Test
     public void createUserShouldReturnBadRequestWhenPasswordIsInvalid() throws Exception {
-        Address address = new Address();
-        address.setStreet("123 Main St");
-        address.setNumber(123);
-        address.setPostalCode(12345);
-        address.setDistrict("Downtown");
-        address.setState("CA");
-
+        AddressRequestDTO address = AddressFaker.getAddressRequestDTOFaker();
         UserRequestDTO invalidUserRequest = new UserRequestDTO(
                 "test@example.com",
                 "1",
@@ -131,12 +116,7 @@ public class UserControllerTest {
 
     @Test
     public void createUserShouldReturnBadRequestWhenNameIsInvalid() throws Exception {
-        Address address = new Address();
-        address.setStreet("123 Main St");
-        address.setNumber(123);
-        address.setPostalCode(12345);
-        address.setDistrict("Downtown");
-        address.setState("CA");
+        AddressRequestDTO address = AddressFaker.getAddressRequestDTOFaker();
 
         UserRequestDTO invalidUserRequest = new UserRequestDTO(
                 "test@example.com",
@@ -216,12 +196,7 @@ public class UserControllerTest {
 
     @Test
     public void createUserShouldReturnBadRequestWhenRequiredFieldsAreMissing() throws Exception {
-        Address address = new Address();
-        address.setStreet("123 Main St");
-        address.setNumber(123);
-        address.setPostalCode(12345);
-        address.setDistrict("Downtown");
-        address.setState("CA");
+        AddressRequestDTO address = AddressFaker.getAddressRequestDTOFaker();
 
         UserRequestDTO invalidUserRequest = new UserRequestDTO(
                 null,
@@ -239,12 +214,7 @@ public class UserControllerTest {
 
     @Test
     public void createUserShouldReturnCreatedWhenOptionalFieldsAreProvided() throws Exception {
-        Address address = new Address();
-        address.setStreet("456 Another St");
-        address.setNumber(456);
-        address.setPostalCode(54321);
-        address.setDistrict("Uptown");
-        address.setState("NY");
+        AddressRequestDTO address = AddressFaker.getAddressRequestDTOFaker();
 
         UserRequestDTO userRequestWithOptionalFields = new UserRequestDTO(
                 "test@example.com",
