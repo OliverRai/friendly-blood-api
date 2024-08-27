@@ -8,6 +8,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.Optional;
 import java.util.UUID;
 
+import com.friendlyblood.api.domain.models.Address;
+import com.friendlyblood.api.dtos.Address.AddressRequestDTO;
+import com.friendlyblood.api.faker.AddressFaker;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -55,12 +58,14 @@ public class UserControllerTest {
     @BeforeEach
     void setUp() {
         faker = new Faker();
+        AddressRequestDTO address = AddressFaker.getAddressRequestDTOFaker();
+
         validUserRequest = new UserRequestDTO(
                 "test@example.com",
                 "password123",
                 "John Doe",
                 BloodType.O_POSITIVE,
-                "123 Main St");
+                address);
     }
 
     @Test
@@ -79,46 +84,50 @@ public class UserControllerTest {
 
     @Test
     public void createUserShouldReturnBadRequestWhenEmailIsInvalid() throws Exception {
+        AddressRequestDTO address = AddressFaker.getAddressRequestDTOFaker();
         UserRequestDTO invalidUserRequest = new UserRequestDTO(
                 "",
                 "password123",
                 "John Doe",
                 BloodType.O_POSITIVE,
-                "123 Main St");
+                address);
 
         mockMvc.perform(post("/user")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(invalidUserRequest)))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(invalidUserRequest)))
                 .andExpect(status().isBadRequest());
     }
 
     @Test
     public void createUserShouldReturnBadRequestWhenPasswordIsInvalid() throws Exception {
+        AddressRequestDTO address = AddressFaker.getAddressRequestDTOFaker();
         UserRequestDTO invalidUserRequest = new UserRequestDTO(
                 "test@example.com",
                 "1",
                 "John Doe",
                 BloodType.O_POSITIVE,
-                "123 Main St");
+                address);
 
         mockMvc.perform(post("/user")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(invalidUserRequest)))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(invalidUserRequest)))
                 .andExpect(status().isBadRequest());
     }
 
     @Test
     public void createUserShouldReturnBadRequestWhenNameIsInvalid() throws Exception {
+        AddressRequestDTO address = AddressFaker.getAddressRequestDTOFaker();
+
         UserRequestDTO invalidUserRequest = new UserRequestDTO(
                 "test@example.com",
                 "password123",
                 "",
                 BloodType.O_POSITIVE,
-                "123 Main St");
+                address);
 
         mockMvc.perform(post("/user")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(invalidUserRequest)))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(invalidUserRequest)))
                 .andExpect(status().isBadRequest());
     }
 
@@ -129,11 +138,11 @@ public class UserControllerTest {
                 "password123",
                 "John Doe",
                 BloodType.O_POSITIVE,
-                "");
+                null);
 
         mockMvc.perform(post("/user")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(invalidUserRequest)))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(invalidUserRequest)))
                 .andExpect(status().isBadRequest());
     }
 
@@ -187,27 +196,32 @@ public class UserControllerTest {
 
     @Test
     public void createUserShouldReturnBadRequestWhenRequiredFieldsAreMissing() throws Exception {
+        AddressRequestDTO address = AddressFaker.getAddressRequestDTOFaker();
+
         UserRequestDTO invalidUserRequest = new UserRequestDTO(
                 null,
                 "password123",
                 "John Doe",
                 BloodType.O_POSITIVE,
-                "123 Main St");
+                address);
 
         mockMvc.perform(post("/user")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(invalidUserRequest)))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(invalidUserRequest)))
                 .andExpect(status().isBadRequest());
     }
 
+
     @Test
     public void createUserShouldReturnCreatedWhenOptionalFieldsAreProvided() throws Exception {
+        AddressRequestDTO address = AddressFaker.getAddressRequestDTOFaker();
+
         UserRequestDTO userRequestWithOptionalFields = new UserRequestDTO(
                 "test@example.com",
                 "password123",
                 "John Doe",
                 BloodType.O_NEGATIVE,
-                "456 Another St");
+                address);
 
         User user = new User(userRequestWithOptionalFields);
         user.setId(UUID.randomUUID());
@@ -215,11 +229,12 @@ public class UserControllerTest {
         Mockito.when(userService.createUser(Mockito.any(User.class))).thenReturn(user);
 
         mockMvc.perform(post("/user")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(userRequestWithOptionalFields)))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(userRequestWithOptionalFields)))
                 .andExpect(status().isCreated())
                 .andExpect(content().json("{\"id\":\"" + user.getId() + "\"}"));
     }
+
 
     @Test
     public void loginOk() throws Exception {

@@ -2,6 +2,8 @@ package com.friendlyblood.api.domain.models.baseModel;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,12 +18,23 @@ import java.time.LocalDateTime;
 @Getter
 public class BaseEntity {
 
-    @Column(name = "created_at")
-    public LocalDateTime createAt;
+    @Column(name = "created_at", updatable = false)
+    private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
-    public LocalDateTime updateAt;
+    private LocalDateTime updatedAt;
 
     @Column(name = "deleted_at")
-    public LocalDateTime deleteAt;
+    private LocalDateTime deletedAt;
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedAt = LocalDateTime.now();
+    }
 }
