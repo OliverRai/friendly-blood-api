@@ -1,11 +1,8 @@
 package com.friendlyblood.api.domain.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.friendlyblood.api.domain.models.baseModel.BaseEntity;
 import com.friendlyblood.api.dtos.Address.AddressRequestDTO;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
