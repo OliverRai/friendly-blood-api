@@ -46,6 +46,6 @@ public class User extends BaseEntity {
         this.password = payload.password();
         this.name = payload.name();
         this.bloodType = payload.bloodType();
-        this.address = payload.address();
+        this.address = new Address(payload.address());
     }
 }
