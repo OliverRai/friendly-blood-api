@@ -1,7 +1,7 @@
 CREATE TABLE donation_address(
     id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-    latitude VARCHAR(255) NOT NULL,
-    longitude VARCHAR(255) NOT NULL,
+    latitude DOUBLE NOT NULL,
+    longitude DOUBLE NOT NULL,
     address_id UUID,
     FOREIGN KEY (address_id) REFERENCES address(id) ON DELETE CASCADE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

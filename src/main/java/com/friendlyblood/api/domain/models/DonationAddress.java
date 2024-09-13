@@ -22,10 +22,10 @@ public class DonationAddress extends BaseEntity {
     private UUID id;
 
     @Column(nullable = false)
-    private String latitude;
+    private Double latitude;
 
     @Column(nullable = false)
-    private String longitude;
+    private Double longitude;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", nullable = false)
