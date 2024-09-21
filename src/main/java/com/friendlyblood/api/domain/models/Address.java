@@ -18,10 +18,6 @@ import java.util.UUID;
 @AllArgsConstructor
 public class Address extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
-
     @Column(nullable = false)
     private String street;
 

@@ -17,10 +17,6 @@ import java.util.UUID;
 @AllArgsConstructor
 public class DonationAddress extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
-
     @Column(nullable = false)
     private Double latitude;
 
