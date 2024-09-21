@@ -20,10 +20,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class User extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
-
     @Column(nullable = false)
     private String email;
 

@@ -10,17 +10,20 @@ import lombok.Setter;
 import java.util.UUID;
 
 @Entity
-@Table(name = "donation_proof")
+@Table(name = "donation_address")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class DonationProof extends BaseEntity {
+public class DonationAddress extends BaseEntity {
 
     @Column(nullable = false)
-    private String eTag;
+    private Double latitude;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User userId;
+    @Column(nullable = false)
+    private Double longitude;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id", nullable = false)
+    private Address address;
 }
